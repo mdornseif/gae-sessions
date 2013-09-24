@@ -87,6 +87,12 @@ session data might be lost at any time!  If cookie-only sessions have not been
 disabled, then small sessions will still be stored in cookies (this is faster
 than memcache).
 
+If you want to exclude certain URLs from session generation use the `ignore_paths`
+parameter, which should contain a regular expression. Not generating Cookies is
+important in certian HTTP caching scenarios. E.g.
+
+    app = SessionMiddleware(app, cookie_key=COOKIE_KEY, ignore_paths='^/images/.*$')
+
 You will also want to create a cronjob to periodically remove expired sessions
 from the datastore.  You can find the [example
 cronjob](http://github.com/dound/gae-sessions/tree/master/demo/cron.yaml) and
@@ -135,8 +141,8 @@ for authentication Here's a few lines of example code too:
     session.regenerate_id()
 
 
-_Author_: [David Underhill](http://www.dound.com)  
-_Updated_: 2011-Jul-03 (v1.07)  
+_Author_: [David Underhill](http://www.dound.com)
+_Updated_: 2011-Jul-03 (v1.07)
 _License_: Apache License Version 2.0
 
 For more information, please visit the [gae-sessions webpage](http://wiki.github.com/dound/gae-sessions/).
