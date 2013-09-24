@@ -35,9 +35,6 @@ _tls = threading.local()
 
 def get_current_session():
     """Returns the session associated with the current request."""
-    if not hasattr(_tls, 'current_session'):
-        logging.warn('no current Session for this thread - your setup might be broken')
-        set_current_session(Session())  
     return _tls.current_session
 
 
